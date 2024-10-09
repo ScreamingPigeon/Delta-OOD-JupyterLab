@@ -78,6 +78,14 @@ attributes:
     readonly: false
     help: "Select your project directory; defaults to $HOME"
 
+
+  bc_xalt_enabled:
+    label: "Enable XALT"
+    widget: "check_box"
+    help: "Collects data on module and library usage to improve our services"
+    value: true
+
+
 # All of the attributes that make up the Dashboard form (in respective order),
 # and made available to the submit configuration file and the template ERB
 # files
@@ -97,3 +105,4 @@ form:
   - bc_num_gpus
   - bc_email_on_started
   - working_dir
+  - bc_xalt_enabled

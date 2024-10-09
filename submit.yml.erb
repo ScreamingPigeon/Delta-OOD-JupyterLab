@@ -48,3 +48,7 @@ script:
     <%- unless bc_reservation.blank? -%>
     - "--reservation=<%= bc_reservation %>"
     <%- end -%>
+    <%- if bc_xalt_enabled -%>
+    - "--signal=B:TERM@60"
+    - "--export=OOD_USE_XALT=yes"
+    <%- end -%>

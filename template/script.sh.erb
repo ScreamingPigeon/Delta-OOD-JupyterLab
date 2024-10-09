@@ -22,6 +22,30 @@ module load anaconda3_gpu
 module load anaconda3_cpu
 <%- end -%>
 
+# Put XALT in modulepath
+# LOAD XALT HERE
+# SETUP Signal handlers
+<%- if context.bc_xalt_enabled -%>
+  module load xalt
+  
+  # Setting up signal handler
+  function preempt_xalt(){
+	  # Find the Jupyter Lab instance here and send USR2 to it
+	  pids=$(ps -xfs | grep jupyter-lab | grep -v grep | awk '{print $2}')
+
+	  for pid in $pids; do 
+		  kill -s TERM $pid
+		  echo "Preempting ${pid}"
+	  done
+  }
+
+  export XALT_SIGNAL_HANDLER=yes
+  trap preempt_xalt SIGTERM
+
+<%- end -%>
+
+
+
 # List loaded modules
 module list
 
